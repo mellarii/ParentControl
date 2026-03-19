@@ -1,7 +1,5 @@
-import sys
-
-from PyQt6.QtCore import (Qt, QTimer)
-from PyQt6.QtWidgets import  (QApplication, QWidget, QLabel, QPushButton, QLineEdit)
+from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import  (QWidget, QLabel)
 
 class StateWindow(QWidget):
   def __init__(self, parent=None):

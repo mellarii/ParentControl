@@ -1,7 +1,5 @@
-import sys
-
 from PyQt6.QtCore import (Qt, QTimer)
-from PyQt6.QtWidgets import  (QApplication, QWidget, QLabel, QPushButton, QLineEdit)
+from PyQt6.QtWidgets import  (QWidget, QLabel, QPushButton)
 
 from windows import StateWindow, BlacklistWindow
 
