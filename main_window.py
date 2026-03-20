@@ -16,7 +16,7 @@ class mainWindow(QWidget):
 
   def init_ui(self): 
     self.setWindowTitle("Parent Control")  
-    self.resize(960,540)
+    self.setFixedSize(960,540)
 
     self.main_text = QLabel("JustBeggining", self)
     self.main_text.resize(400,100)
@@ -29,14 +29,14 @@ class mainWindow(QWidget):
 
     self.start_btn = QPushButton("Start", self)
     self.start_btn.move(440, 270)
-    self.bunlist_btn = QPushButton("Add new sites to blacklist.", self)
-    self.bunlist_btn.move(15, 500)
+    self.blacklist_btn = QPushButton("Add new sites to blacklist.", self)
+    self.blacklist_btn.move(15, 500)
     self.state_btn = QPushButton("Device activity statistics", self)
     self.state_btn.move(15, 465)
 
     self.start_btn.clicked.connect(self.startLogic)
     self.state_btn.clicked.connect(self.state_win.show)
-    self.bunlist_btn.clicked.connect(self.blacklist_win.show)
+    self.blacklist_btn.clicked.connect(self.blacklist_win.show)
 
   def init_timer(self):
     self.clock = QTimer()
