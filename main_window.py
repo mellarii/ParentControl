@@ -1,15 +1,16 @@
 from PyQt6.QtCore import (Qt, QTimer)
 from PyQt6.QtWidgets import  (QWidget, QLabel, QPushButton)
 
-from windows import StateWindow, BlacklistWindow
+from windows import SettingsWindow, StateWindow, BlacklistWindow
 
-class mainWindow(QWidget):
+class ParentControlApp(QWidget):
   def __init__(self):
     super().__init__()
     self.time_seconds = 0
 
     self.state_win = StateWindow(self)
     self.blacklist_win = BlacklistWindow(self)
+    self.settings_win = SettingsWindow(self)
 
     self.init_ui()
     self.init_timer()
@@ -29,14 +30,18 @@ class mainWindow(QWidget):
 
     self.start_btn = QPushButton("Start", self)
     self.start_btn.move(440, 270)
-    self.blacklist_btn = QPushButton("Add new sites to blacklist.", self)
-    self.blacklist_btn.move(15, 500)
+    self.settings_btn = QPushButton("Settings", self)
+    self.settings_btn.move(15, 15)
     self.state_btn = QPushButton("Device activity statistics", self)
     self.state_btn.move(15, 465)
+    self.blacklist_btn = QPushButton("Add new sites to blacklist.", self)
+    self.blacklist_btn.move(15, 500)
 
     self.start_btn.clicked.connect(self.startLogic)
+    self.settings_btn.clicked.connect(self.settings_win.show)
     self.state_btn.clicked.connect(self.state_win.show)
     self.blacklist_btn.clicked.connect(self.blacklist_win.show)
+    
 
   def init_timer(self):
     self.clock = QTimer()
