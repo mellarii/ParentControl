@@ -2,45 +2,7 @@ import json
 import os
 
 from PyQt6.QtCore import Qt, QSettings
-from PyQt6.QtWidgets import  (QWidget, QLabel, QLineEdit, QPushButton, QMessageBox)
-
-class SettingsWindow(QWidget):
-  def __init__(self, parent=None):
-    super().__init__(parent, Qt.WindowType.Window)
-    self.setWindowTitle("Settings")
-    self.resize(480, 270)
-    self.settings = QSettings("Mellarii", "ParentControl")
-    
-    self.parentLabel = QLabel("Parent: ", self)
-    self.parentLabel.move(15, 15)
-    self.parentName = QLineEdit(self)
-    self.parentName.setPlaceholderText(" Name ")
-    self.parentName.move(57, 10)
-
-    self.childLabel = QLabel("Child: ", self)
-    self.childLabel.move(15, 35)
-    self.childName = QLineEdit(self)
-    self.childName.setPlaceholderText(" Name ")
-    self.childName.move(57, 30)
-
-    self.parentName.setText(self.settings.value("parent_name", ""))
-    self.childName.setText(self.settings.value("parent_name", ""))
-
-  def closeEvent(self, event):
-    self.settings.setValue("parent_name", self.parentName.text())
-    self.settings.setValue("child_name", self.childName.text())
-    super().closeEvent(event)
-
-
-class StateWindow(QWidget):
-  def __init__(self, parent=None):
-    super().__init__(parent, Qt.WindowType.Window)
-    self.setWindowTitle("Statistics")
-    self.resize(480, 270)
-    
-    self.UsingTime = QLabel("Today you use: ", self)
-    self.UsingTime.move(15, 55)
-
+from PyQt6.QtWidgets import  QWidget, QLabel, QLineEdit, QPushButton, QMessageBox
 
 class BlacklistWindow(QWidget):
   def __init__(self, parent=None):
@@ -62,6 +24,10 @@ class BlacklistWindow(QWidget):
     self.delete_btn = QPushButton("Delete site",self)
     self.delete_btn.move(105, 57)
     self.delete_btn.clicked.connect(self.delete_site)
+
+    self.clear_btn = QPushButton("Clear url's", self)
+    self.clear_btn.move(190, 57)
+    self.clear_btn.clicked.connect(self.clear_all)
 
   def load_data(self):
     if os.path.exists(self.blackFile_path):
@@ -91,3 +57,8 @@ class BlacklistWindow(QWidget):
       self.input_field.clear()
     else:
       QMessageBox.warning(self, "Error", "This site dont be added yet")
+
+  def clear_all(self):
+    self.sites = []
+    with open(self.blackFile_path, "w", encoding="utf-8") as f:
+      json.dump([], f)
