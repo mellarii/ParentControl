@@ -71,6 +71,8 @@ class ParentControlApp(QWidget):
     if self.clock.isActive(): 
       self.clock.stop()
       self.start_btn.setText("Resume")
+      self.blacklist_win.unblock_sites()
     else:
       self.clock.start(1000)
       self.start_btn.setText("Running...")
+      self.blacklist_win.block_sites()
